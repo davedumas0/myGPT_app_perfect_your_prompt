@@ -32,6 +32,11 @@ def read_api_key(file_path):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 api_key_file_path = os.path.join(dir_path, "api_key.txt")
+
+if not os.path.exists(api_key_file_path):
+    raise FileNotFoundError(f"The api_key.txt file could not be found at {api_key_file_path}")
+
+
 openai.api_key = read_api_key(api_key_file_path)
 
 def interact_with_chatgpt(prompt, model, max_tokens, temperature, role):
